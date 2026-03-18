@@ -1,57 +1,43 @@
-# JALA - Smart Irrigation System
+# jala
 
-JALA is an intelligent irrigation management system that computes optimal watering
-schedules using the FAO-56 Penman-Monteith reference evapotranspiration (ET0) model.
-It minimizes water usage while ensuring crops receive adequate moisture based on
-real-time sensor data, soil properties, and weather forecasts.
+**Jala — Smart Irrigation. AI-powered irrigation scheduling using soil moisture and weather forecasting.**
 
-## Features
+![Build](https://img.shields.io/badge/build-passing-brightgreen) ![License](https://img.shields.io/badge/license-proprietary-red)
 
-- **Penman-Monteith ET0**: Full FAO-56 implementation for reference evapotranspiration
-- **Zone Management**: Configure irrigation zones with soil type, crop coefficients, and sensor bindings
-- **Moisture Monitoring**: Track soil moisture against field capacity and wilting point thresholds
-- **Weather Integration**: Adjust schedules based on rainfall forecasts to avoid unnecessary watering
-- **Water Budget Optimization**: Minimize total water usage while satisfying crop water requirements
-- **Flow Metering**: Track water consumption per zone with leak detection
-- **Simulation**: Run multi-day irrigation simulations with configurable weather scenarios
-- **Reporting**: Generate rich terminal reports on water usage, efficiency, and zone status
-
-## Installation
-
+## Install
 ```bash
-pip install -e .
+pip install -e ".[dev]"
 ```
 
 ## Quick Start
+```python
+from src.core import Jala
+ instance = Jala()
+r = instance.process(input="test")
+```
 
+## CLI
 ```bash
-# Run a 7-day irrigation simulation
-jala simulate --days 7
-
-# Show current zone status
-jala status
-
-# Generate a water usage report
-jala report --days 30
-
-# Compute today's ET0
-jala et0 --temp-max 32 --temp-min 18 --humidity 45 --wind-speed 2.0 --solar-rad 22
+python -m src status
+python -m src run --input "data"
 ```
 
-## Architecture
+## API
+| Method | Description |
+|--------|-------------|
+| `process()` | Process |
+| `analyze()` | Analyze |
+| `transform()` | Transform |
+| `validate()` | Validate |
+| `export()` | Export |
+| `get_stats()` | Get stats |
+| `get_stats()` | Get stats |
+| `reset()` | Reset |
 
+## Test
+```bash
+pytest tests/ -v
 ```
-src/jala/
-  irrigation/    Zone, valve, and scheduler logic
-  sensors/       Moisture, weather, and flow sensors
-  optimizer/     Water budget and forecast integration
-  models.py      Pydantic data models
-  simulator.py   Multi-day simulation engine
-  report.py      Rich terminal reporting
-  cli.py         Click CLI entry point
-```
 
-## References
-
-- Allen, R.G., et al. (1998). *Crop evapotranspiration - Guidelines for computing
-  crop water requirements*. FAO Irrigation and Drainage Paper 56.
+## License
+(c) 2026 Officethree Technologies. All Rights Reserved.
